@@ -19,7 +19,7 @@ export default function Page() {
       <header className="flex h-16 shrink-0 items-center gap-2 border-b">
         <Image src={highVisFPL} alt="Logo" width={75} height={25} />
         <Separator orientation="vertical" className="mr-2 h-4" />
-        <div className="ml-auto flex items-center gap-2">
+        <div className="p-4 ml-auto flex items-center gap-2">
           <Input type="managerId" placeholder="Manager Id" />
           <Button variant="secondary">Get Data</Button>
         </div>
