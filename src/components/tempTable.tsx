@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Separator } from "./ui/separator"
 
 const invoices = [
   {
@@ -88,10 +89,11 @@ export function TableDemo() {
   return (
 
     <div className="p-4">
-      <h1 className="text-2xl">Overall League Table</h1>
+      <h1 className="pb-4 pt-1 text-3xl">Overall League Table</h1>
+      <Separator />
       <Table>
         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-        <TableHeader>
+        <TableHeader className="bg-gray-700">
           <TableRow>
             <TableHead className="w-[100px]">Rank</TableHead>
             <TableHead>Team</TableHead>
