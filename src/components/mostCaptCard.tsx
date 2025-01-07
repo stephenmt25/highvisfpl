@@ -7,9 +7,11 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 
+interface MostCaptCardProps {
+  playername: string;
+}
 
-
-export function MostCaptCard() {
+export function MostCaptCard({ playername }: MostCaptCardProps) {
   return (
     <Card className="">
       <CardHeader className="pb-1" >
@@ -19,7 +21,7 @@ export function MostCaptCard() {
         <h1
           className="text-xl whitespace"
         >
-          B. Fernandes
+          {playername}
         </h1>
       </CardContent>
       <CardFooter className="flex text-sm  gap-2 leading-none">
