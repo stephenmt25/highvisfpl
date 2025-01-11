@@ -112,14 +112,14 @@ export function AveragePtsLineChart() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
+      {/* <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
           Trending up by 5.2% this week <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
           Showing average points per gameweek completed
         </div>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 }

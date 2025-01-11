@@ -10,54 +10,82 @@ import {
 } from "@/components/ui/table"
 import { Separator } from "./ui/separator"
 
-const invoices = [
+const data = [
   {
-    invoice: "1",
-    paymentStatus: "Paid",
-    totalAmount: "250",
-    paymentMethod: "Credit Card",
+    rank: "1",
+    teamName: "The Invincibles",
+    managerName: "Alex Ferguson",
+    gwPoints: "85",
+    totalPoints: "1020"
   },
   {
-    invoice: "2",
-    paymentStatus: "Pending",
-    totalAmount: "150",
-    paymentMethod: "PayPal",
+    rank: "2",
+    teamName: "Goal Diggers",
+    managerName: "Pep Guardiola",
+    gwPoints: "78",
+    totalPoints: "1012"
   },
   {
-    invoice: "3",
-    paymentStatus: "Unpaid",
-    totalAmount: "350",
-    paymentMethod: "Bank Transfer",
+    rank: "3",
+    teamName: "Penalty Kings",
+    managerName: "Jurgen Klopp",
+    gwPoints: "80",
+    totalPoints: "1008"
   },
   {
-    invoice: "4",
-    paymentStatus: "Paid",
-    totalAmount: "450",
-    paymentMethod: "Credit Card",
+    rank: "4",
+    teamName: "Clean Sheet Warriors",
+    managerName: "Jose Mourinho",
+    gwPoints: "72",
+    totalPoints: "995"
   },
   {
-    invoice: "5",
-    paymentStatus: "Paid",
-    totalAmount: "550",
-    paymentMethod: "PayPal",
+    rank: "5",
+    teamName: "The Flying Dutchmen",
+    managerName: "Louis van Gaal",
+    gwPoints: "67",
+    totalPoints: "980"
   },
   {
-    invoice: "6",
-    paymentStatus: "Pending",
-    totalAmount: "200",
-    paymentMethod: "Bank Transfer",
+    rank: "6",
+    teamName: "Tactical Masters",
+    managerName: "Antonio Conte",
+    gwPoints: "75",
+    totalPoints: "970"
   },
   {
-    invoice: "7",
-    paymentStatus: "Unpaid",
-    totalAmount: "300",
-    paymentMethod: "Credit Card",
+    rank: "7",
+    teamName: "Striker’s Army",
+    managerName: "Carlo Ancelotti",
+    gwPoints: "65",
+    totalPoints: "950"
   },
-]
+  {
+    rank: "8",
+    teamName: "Midfield Magicians",
+    managerName: "Zinedine Zidane",
+    gwPoints: "69",
+    totalPoints: "920"
+  },
+  {
+    rank: "9",
+    teamName: "Defensive Masters",
+    managerName: "Rafael Benitez",
+    gwPoints: "60",
+    totalPoints: "900"
+  },
+  {
+    rank: "10",
+    teamName: "Super Strikers",
+    managerName: "Mauricio Pochettino",
+    gwPoints: "63",
+    totalPoints: "880"
+  }
+];
+
 
 export function TableDemo() {
   return (
-    
     <Table className='text-black p-4 rounded-xl bg-white bg-opacity-80'>
       <TableCaption className="text-purple-900 text-xl">Overall Top 10 Managers</TableCaption>
       <TableHeader className="bg-purple-900 rounded-xl">
@@ -69,12 +97,15 @@ export function TableDemo() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice} className='border-0'>
-            <TableCell className="font-medium text-center">{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell className="text-center">{invoice.paymentMethod}</TableCell>
-            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+        {data.map((team, index) => (
+          <TableRow key={index} className='border-0'>
+            <TableCell className="font-medium text-center">{team.rank}</TableCell>
+            <TableCell className="text-left">
+              <div className="font-medium">{team.teamName}</div>
+              <div className="text-gray-600 text-xs">{team.managerName}</div>
+            </TableCell>
+            <TableCell className="text-center">{team.gwPoints}</TableCell>
+            <TableCell className="text-right">{team.totalPoints}</TableCell>
           </TableRow>
         ))}
       </TableBody>
