@@ -18,6 +18,8 @@ import { ManagerStats } from "@/components/managerStats"
 import { createClient } from '@/utils/supabase/client'
 import { Skeleton } from "@/components/ui/skeleton"
 import { TempBarChart } from "@/components/templateBarChart"
+import { AveragePtsLineChart } from "@/components/averagePointsLineChart"
+import { AverageTeamValueAreaChart } from "@/components/averageTeamValueAreaChart"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -112,10 +114,10 @@ export default function Page1() {
                     {highScorePlayer ? <HighestScoringPlayer playername={highScorePlayer[0].web_name} /> : <Skeleton className=" rounded-xl" />}
                   </div>
                   <div className="col-span-2 ">
-                    <OverallPointsDist />
+                    <AverageTeamValueAreaChart />
                   </div>
                   <div className="col-span-2 ">
-                    <TempBarChart />
+                    <AveragePtsLineChart />
                   </div>
 
                 </div>
