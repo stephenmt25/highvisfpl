@@ -53,71 +53,31 @@ const invoices = [
     totalAmount: "300",
     paymentMethod: "Credit Card",
   },
-  {
-    invoice: "8",
-    paymentStatus: "Unpaid",
-    totalAmount: "300",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "9",
-    paymentStatus: "Unpaid",
-    totalAmount: "300",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "10",
-    paymentStatus: "Unpaid",
-    totalAmount: "300",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "11",
-    paymentStatus: "Unpaid",
-    totalAmount: "300",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "12",
-    paymentStatus: "Unpaid",
-    totalAmount: "300",
-    paymentMethod: "Credit Card",
-  },
 ]
 
 export function TableDemo() {
   return (
-
-    <div className="p-4">
-      <h1 className="pb-4 pt-1 text-3xl">Overall League Table</h1>
-      <Separator />
-      <Table>
-        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-        <TableHeader className="bg-gray-700">
-          <TableRow>
-            <TableHead className="w-[100px]">Rank</TableHead>
-            <TableHead>Team</TableHead>
-            <TableHead>Manager</TableHead>
-            <TableHead className="text-right">GW Points</TableHead>
+    
+    <Table className='text-black p-4 rounded-xl bg-white bg-opacity-80'>
+      <TableCaption className="text-purple-900 text-xl">Overall Top 10 Managers</TableCaption>
+      <TableHeader className="bg-purple-900 rounded-xl">
+        <TableRow>
+          <TableHead className='text-center text-white '>Rank</TableHead>
+          <TableHead className="w-[300px] text-white">Team & Manager</TableHead>
+          <TableHead className="text-center text-white">GW </TableHead>
+          <TableHead className="text-right text-white">Total</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {invoices.map((invoice) => (
+          <TableRow key={invoice.invoice} className='border-0'>
+            <TableCell className="font-medium text-center">{invoice.invoice}</TableCell>
+            <TableCell>{invoice.paymentStatus}</TableCell>
+            <TableCell className="text-center">{invoice.paymentMethod}</TableCell>
+            <TableCell className="text-right">{invoice.totalAmount}</TableCell>
           </TableRow>
-        </TableHeader>
-        <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        {/* <TableFooter>
-      <TableRow>
-        <TableCell colSpan={3}>Total</TableCell>
-        <TableCell className="text-right">$2,500.00</TableCell>
-      </TableRow>
-    </TableFooter> */}
-      </Table>
-    </div>
+        ))}
+      </TableBody>
+    </Table>
   )
 }

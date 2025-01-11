@@ -1,126 +1,64 @@
-'use client'
+"use client";
 
-import { AveragePointsCard } from "@/components/averagePointsCard"
-import { HighPointsCard } from "@/components/highPointsCard"
-import { HighestScoringPlayer } from "@/components/highScorePlayerCard"
-import { MostCaptCard } from "@/components/mostCaptCard"
-import { OverallCaptains } from "@/components/overallCaptains"
-import { OverallPointsDist } from "@/components/overallPointsDist"
-import { PaginationDemo } from "@/components/pagination1"
-import { TableDemo } from "@/components/tempTable"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Separator } from "@/components/ui/separator"
-import Image from 'next/image'
-import highVisFPL from "../../public/highVisFPL.png"
-import { useState, useEffect } from "react"
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { ErrorBoundary } from "@/components/ErrorBoundary"
-import { ManagerStats } from "@/components/managerStats"
-import { createClient } from '@/utils/supabase/client'
-import { Skeleton } from "@/components/ui/skeleton"
+import { useState } from 'react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Separator } from '@/components/ui/separator';
+import Image from 'next/image';
+import Premier_League_Symbol from "../../public/Premier_League_Symbol.png"
+import Page1 from './page1';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      refetchOnWindowFocus: false,
-      staleTime: 300000, // 5 minutes
-    },
-  },
-});
-
-export default function Page() {
-  const [managerId, setManagerId] = useState<number | null>(null);
-  const [manager, setManager] = useState<any | null>(null);
-  const [gameweekData, setGameweekData] = useState<any[] | null>(null)
-  const [highScorePlayer, setHighScorePlayer] = useState<any | null>(null)
-  const [mostCaptPlayer, setMostCaptPlayer] = useState<any | null>(null)
-  const supabase = createClient()
-  useEffect(() => {
-    const getData = async () => {
-      const { data } = await supabase.from('fploveralldata').select()
-      setGameweekData(data)
-    }
-    getData()
-  }, [])
-
-  const handleEnterClick = () => {
-    if (managerId !== null) {
-      setManager(managerId);
-    }
-  };
-
-  const currentGW = gameweekData?.filter((gw) => gw.is_current === "true")[0]
-
-  useEffect(() => {
-    const getHighScorePlayer = async () => {
-      const { data } = await supabase.from('plplayerdata')
-      .select()
-      .eq('id', currentGW?.top_element);
-      
-      setHighScorePlayer(data)
-    }
-    getHighScorePlayer()
-  }, [currentGW])
-
-  useEffect(() => {
-    const getMostCaptPlayer = async () => {
-      const { data } = await supabase.from('plplayerdata')
-      .select()
-      .eq('id', currentGW?.most_captained);
-      console.log(data)
-      setMostCaptPlayer(data)
-    }
-    getMostCaptPlayer()
-  }, [currentGW])
-
-
-
+const Project = () => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ErrorBoundary>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-          <Image src={highVisFPL} alt="Logo" width={75} height={25} />
-          <Separator orientation="vertical" className="mr-2 h-4" />
-          <div className="p-4 ml-auto flex items-center gap-2">
-            <Input onChange={(e) => setManagerId(parseInt(e.target.value))} type="managerId" placeholder="Manager Id" />
-            <Button onClick={handleEnterClick} variant="secondary">Get Data</Button>
-          </div>
-        </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className=" p-4 grid auto-rows-min col-span-2  gap-4 aspect-video rounded-xl bg-muted/50">
-              <div className="flex">
-                <h1 className="text-3xl">{currentGW?.name || 'Current Gameweek'}</h1>
-                <div className="ml-auto">
-                  <PaginationDemo />
-                </div>
-              </div>
-              <Separator />
-              {manager ? <ManagerStats managerId={manager} /> :
-                <div className=" grid auto-rows-min gap-4 md:grid-cols-4 ">
-                  
-                  <HighPointsCard highpts={currentGW?.highest_score} />
-                  <AveragePointsCard avgpts={currentGW?.average_entry_score} />
-                  {mostCaptPlayer ? <MostCaptCard playername={mostCaptPlayer[0].web_name}/> : <Skeleton className=" rounded-xl" />}
-                  {highScorePlayer ? <HighestScoringPlayer playername={highScorePlayer[0].web_name}/>: <Skeleton className=" rounded-xl" />}
-                  <div className="col-span-2 ">
-                    <OverallPointsDist />
-                  </div>
-                  <div className="col-span-2 ">
-                    <OverallCaptains />
-                  </div>
-                </div>
-              }
-            </div>
-            <div className="aspect-video rounded-xl bg-muted/50">
-              <TableDemo />
-            </div>
-          </div>
+    <div className="min-h-[100svh] overflow-hidden">
+      <div className='fixed top-[-10px] left-[300px] z-[-1] translate-x-48 opacity-40 pl-symbol'>
+        <Image src={Premier_League_Symbol} alt='Premier_League_Symbol'  />
+      </div>
+      <header className='p-5 z-1'>
+        <Separator className='bg-purple-900' />
+        <div data-replace="highvisfpl" className={`text-5xl flex items-center 
+        
+        relative ${isHovered ? 'is-animating' : ''}`}
+        // animate-scroll-up (add to className for animation)
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        >
+          <span className="mt-2">highvisfpl</span>
         </div>
-      </ErrorBoundary>
-    </QueryClientProvider>
-  )
-}
+      </header>
+      <main className=''>
+        <article className='relative min-h-[100svh] block'>
+          <section className='relative z-0 min-h-[43.75rem]'>
+            <div className=''>
+              <div className='pt-[4.875rem] min-h-[25.375rem] max-h-[56.375rem]'/>
+              <div className='grid grid-cols-2'>
+                <h1 className='text-5xl ml-5 max-w-[530px]'>the ultimate platform for visualizing and analyzing FPL data</h1>
+                <div className='justify-self-end self-end mr-[50px]'>Scroll Down  ¬ </div>
+              </div>
+              
+            </div>
+          </section>
+          <section className='relative z-1 min-h-[43.75rem]'>
+            <div className='rounded-2xl mt-[-8rem] bg-purple-900 bg-opacity-20'>
+              <Page1 />
+            </div>
+          </section>
+          <section className='relative z-1 min-h-[13.75rem]'>
+          
+          </section>
+          
+        </article>
+      </main>
+    </div>
+  );
+};
+
+export default Project;
