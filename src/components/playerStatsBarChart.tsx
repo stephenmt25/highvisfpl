@@ -91,9 +91,7 @@ export function PlayerStatsBarChart() {
                   {chartConfig[chart].label}
                 </span>
                 <span className="text-sm font-bold">
-                  {totals[chart].toLocaleString(undefined, {
-                    minimumFractionDigits: chart === "price" ? 1 : 0,
-                  })}
+                  {totals[chart].toLocaleString()}
                 </span>
               </button>
             );
